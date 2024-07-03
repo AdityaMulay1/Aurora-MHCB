@@ -1,0 +1,52 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model BedtimeReminder {
+  createdAt    DateTime                        @default(now())
+  daysOfWeek   EnumBedtimeReminderDaysOfWeek[]
+  id           String                          @id @default(cuid())
+  isActive     Boolean?
+  message      String?
+  reminderId   String?
+  reminderTime DateTime?
+  updatedAt    DateTime                        @updatedAt
+  userId       String?
+}
+
+model SleepPattern {
+  createdAt     DateTime  @default(now())
+  id            String    @id @default(cuid())
+  notes         String?
+  patternId     String?
+  sleepDate     DateTime?
+  sleepDuration Int?
+  sleepEnd      DateTime?
+  sleepQuality  String?
+  sleepStart    DateTime?
+  updatedAt     DateTime  @updatedAt
+  userId        String?
+  wakeUpCount   Int?
+}
+
+model RelaxationExercise {
+  audioUrl    String?
+  category    String?
+  createdAt   DateTime @default(now())
+  description String?
+  duration    Int?
+  exerciseId  String?
+  id          String   @id @default(cuid())
+  title       String?
+  updatedAt   DateTime @updatedAt
+  videoUrl    String?
+}
+
+enum EnumBedtimeReminderDaysOfWeek {
+  Option1
+}
