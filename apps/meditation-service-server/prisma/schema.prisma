@@ -1,0 +1,29 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model MeditationSubPage {
+  createdAt    DateTime @default(now())
+  description  String?
+  id           String   @id @default(cuid())
+  order        Int?
+  sessionType  String?
+  subPageTitle String?
+  updatedAt    DateTime @updatedAt
+}
+
+model MeditationSession {
+  audioUrl  String?
+  createdAt DateTime @default(now())
+  duration  Int?
+  id        String   @id @default(cuid())
+  name      String?
+  typeField String?
+  updatedAt DateTime @updatedAt
+  videoUrl  String?
+}
