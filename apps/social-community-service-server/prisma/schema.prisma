@@ -1,0 +1,51 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Comment {
+  commentId  String?
+  content    String?
+  createdAt  DateTime  @default(now())
+  id         String    @id @default(cuid())
+  timestamp  DateTime?
+  updatedAt  DateTime  @updatedAt
+  userId     String?
+  userPostId String?
+}
+
+model UserPost {
+  content    String?
+  createdAt  DateTime  @default(now())
+  id         String    @id @default(cuid())
+  likesCount Int?
+  postId     String?
+  timestamp  DateTime?
+  updatedAt  DateTime  @updatedAt
+  userId     String?
+}
+
+model UserProfile {
+  bio            String?
+  createdAt      DateTime  @default(now())
+  id             String    @id @default(cuid())
+  joinDate       DateTime?
+  profilePicture String?
+  updatedAt      DateTime  @updatedAt
+  userId         String?
+  username       String?
+}
+
+model Like {
+  createdAt  DateTime  @default(now())
+  id         String    @id @default(cuid())
+  likeId     String?
+  timestamp  DateTime?
+  updatedAt  DateTime  @updatedAt
+  userId     String?
+  userPostId String?
+}
